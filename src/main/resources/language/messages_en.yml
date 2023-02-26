@@ -1,0 +1,32 @@
+Prefix: '&4&lR&candom&6&lC&eommands &7»&r'
+
+Messages:
+  NoPermission: "%prefix% &cYou do not have permission to run this command"
+  ErrorCommand: "%prefix% &cError in the command. See usage in /hb help"
+  PlayerOnly: "%prefix% &cThis command can only be executed by a player"
+  PlayerNotFound: "%prefix% &cThe player %player% does not exist"
+  ReloadComplete: "%prefix% &aThe configuration has been successfully reloaded"
+  ReloadWithErrors: "%prefix% &cErrors found when reloading, check your console logs"
+  Version: "%prefix% &aPlugin version: &e%version%"
+  ListCommandsEmpty: "%prefix% &cThere's no command yet!"
+
+Chat:
+  Hover:
+    PreviousPage: "&7&oPrevious page"
+    NextPage: "&7&oNext page"
+  LineTitle: "&7----------------[ &4&lR&candom&6&lC&eommands&7 ]---------------"
+  PreviousPage: "&7--------[&8<<<&7]-------"
+  NextPage: "&7-------[&8>>>&7]--------"
+  PageFooter: " &8[ &e%pageNumber%&7/&e%totalPage% &8] "
+
+Gui:
+  PreviousPage: "&cPrevious page"
+  NextPage: "&aNext page"
+  Close: "&cClose"
+
+Help:
+  LineTop: "&7--------------------[ &e&lHelp &7]--------------------"
+  Help: "&6/hb help&8: &7&oDisplay this message"
+  List: "&6/hb list <page>&8: &7&oDisplays the list of existing HeadBlocks"
+  Reload: "&6/hb reload&8: &7&oReload the configuration"
+  Version: "&6/hb version&8: &7&oDisplays the version of the plugin"

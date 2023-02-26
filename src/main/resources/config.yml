@@ -1,0 +1,15 @@
+language: en
+
+# If enabled, the plugin will check each tick if the requirements are respected and execute the corresponding commands
+enable: true
+
+# Define the specifics requirements and commands
+# Requirements are not required
+groups:
+  grp_1:
+    requirements:
+      minPlayers: 3
+      interval: 3600
+      chance: 25
+    commands:
+      - "say Hi!"

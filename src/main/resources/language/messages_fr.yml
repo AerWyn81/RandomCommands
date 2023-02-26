@@ -1,0 +1,32 @@
+Prefix: '&4&lR&candom&6&lC&eommands &7»&r'
+
+Messages:
+  NoPermission: "%prefix% &cVous n'avez pas la permission d'éxécuter cette commande"
+  ErrorCommand: "%prefix% &cErreur dans la commande. Vérifiez avec /hb help"
+  PlayerOnly: "%prefix% &cCette commande ne peut être exécutée que par un joueur"
+  PlayerNotFound: "%prefix% &cLe joueur n'est pas connecté"
+  ReloadComplete: "%prefix% &aLa configuration a été rechargée avec succès"
+  ReloadWithErrors: "%prefix% &cErreurs lors du rechargement, vérifiez vos logs console"
+  Version: "%prefix% &aVersion du plugin : &e%version%"
+  ListCommandsEmpty: "%prefix% &cIl n'y a pas de commande pour le moment"
+
+Chat:
+  Hover:
+    PreviousPage: "&7&oPage précédente"
+    NextPage: "&7&oPage suivante"
+  LineTitle: "&7----------------[ &4&lR&candom&6&lC&eommands&7 ]---------------"
+  PreviousPage: "&7--------[&8<<<&7]-------"
+  NextPage: "&7-------[&8>>>&7]--------"
+  PageFooter: " &8[ &e%pageNumber%&7/&e%totalPage% &8] "
+
+Gui:
+  PreviousPage: "&cPage précédente"
+  NextPage: "&aPage suivante"
+  Close: "&cFermer"
+
+Help:
+  LineTop: "&7--------------------[ &e&lAide &7]--------------------"
+  Help: "&6/hb help &8: &7&oAffiche ce message"
+  List: "&6/hb list <page> &8: &7&oAffiche la liste des HeadBlocks existant"
+  Reload: "&6/hb reload &8: &7&oRecharge la configuration"
+  Version: "&6/hb version &8: &7&oAffiche la version du plugin"
