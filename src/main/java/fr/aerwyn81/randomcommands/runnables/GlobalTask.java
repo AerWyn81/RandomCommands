@@ -8,14 +8,23 @@ import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class GlobalTask extends BukkitRunnable {
+
+    private final ArrayList<String> runningCommands;
+
+    public GlobalTask() {
+        this.runningCommands = new ArrayList<>();
+    }
 
     @Override
     public void run() {
         var plugin = RandomCommands.getInstance();
+        var commands = ConfigService.getCommands();
 
-        for (Command command : ConfigService.getCommands()) {
+        for (Command command : commands) {
 
             var optMinPlayers = command.requirements().minPlayers();
             if (optMinPlayers.isPresent() && !ValidatorService.hasEnoughPlayer(optMinPlayers.get())) {
@@ -33,6 +42,11 @@ public class GlobalTask extends BukkitRunnable {
                 continue;
             }
 
+            var optNotWhile = command.requirements().notWhile();
+            if (optNotWhile.isPresent() && !Collections.disjoint(runningCommands, optNotWhile.get())) {
+                continue;
+            }
+
             Bukkit.getScheduler().runTaskLater(plugin, () -> command.commands().forEach(cmd ->
                     plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), cmd)), 1L);
 
@@ -40,6 +54,8 @@ public class GlobalTask extends BukkitRunnable {
                 var nextAvailableTrigger = LocalDateTime.now().plusSeconds(optInterval.get());
                 command.setNextAvailableTrigger(nextAvailableTrigger);
             }
+
+            runningCommands.add(command.id());
         }
     }
 }

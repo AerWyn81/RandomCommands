@@ -11,5 +11,6 @@ groups:
       minPlayers: 3
       interval: 3600
       chance: 25
+      notWhile: []
     commands:
       - "say Hi!"

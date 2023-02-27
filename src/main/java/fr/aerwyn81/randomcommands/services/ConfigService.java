@@ -1,5 +1,6 @@
 package fr.aerwyn81.randomcommands.services;
 
+import fr.aerwyn81.randomcommands.commands.list.List;
 import fr.aerwyn81.randomcommands.datas.Command;
 import fr.aerwyn81.randomcommands.datas.Requirements;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -44,10 +45,11 @@ public class ConfigService {
             Optional<Integer> minPlayers = getOptionalIntegerFromConfig("groups." + cmdGrp + ".requirements.minPlayers");
             Optional<Integer> interval = getOptionalIntegerFromConfig("groups." + cmdGrp + ".requirements.interval");
             Optional<Integer> chance = getOptionalIntegerFromConfig("groups." + cmdGrp + ".requirements.chance");
+            Optional<ArrayList<String>> notWhile = getOptionalStringListFromConfig("groups." + cmdGrp + ".requirements.notWhile");
 
             var command = new Command(
                     cmdGrp,
-                    new Requirements(minPlayers, interval, chance),
+                    new Requirements(minPlayers, interval, chance, notWhile),
                     new ArrayList<>(config.getStringList("groups." + cmdGrp + ".commands"))
             );
 
@@ -61,6 +63,14 @@ public class ConfigService {
         Optional<Integer> optional = Optional.empty();
         if (config.contains(path))
             optional = Optional.of(config.getInt(path));
+
+        return optional;
+    }
+
+    private static Optional<ArrayList<String>> getOptionalStringListFromConfig(String path) {
+        Optional<ArrayList<String>> optional = Optional.empty();
+        if (config.contains(path))
+            optional = Optional.of(new ArrayList<>(config.getStringList(path)));
 
         return optional;
     }
