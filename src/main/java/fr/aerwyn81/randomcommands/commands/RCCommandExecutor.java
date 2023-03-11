@@ -1,9 +1,6 @@
 package fr.aerwyn81.randomcommands.commands;
 
-import fr.aerwyn81.randomcommands.commands.list.Help;
-import fr.aerwyn81.randomcommands.commands.list.List;
-import fr.aerwyn81.randomcommands.commands.list.Reload;
-import fr.aerwyn81.randomcommands.commands.list.Version;
+import fr.aerwyn81.randomcommands.commands.list.*;
 import fr.aerwyn81.randomcommands.services.LanguageService;
 import fr.aerwyn81.randomcommands.utils.bukkit.PlayerUtils;
 import org.bukkit.command.Command;
@@ -31,6 +28,7 @@ public class RCCommandExecutor implements CommandExecutor, TabCompleter {
         this.register(new Reload());
         this.register(new List());
         this.register(new Version());
+        this.register(new Reset());
     }
 
     private void register(Cmd c) {

@@ -1,5 +1,7 @@
 package fr.aerwyn81.randomcommands.datas;
 
+import fr.aerwyn81.randomcommands.utils.message.MessageUtils;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -38,11 +40,9 @@ public final class Command {
     }
 
     public String display() {
-        return "Command" +
-                "id='" + id + '\'' +
-                ", requirements=" + requirements +
-                ", commands=" + commands +
-                ", nextAvailableTrigger=" + nextAvailableTrigger +
-                '}';
+        return MessageUtils.colorize("&7Command:" +
+                ("\n" + " &fRequirements: &7" + "\n" + requirements.display()) +
+                ("\n" + " &fCommands: &7" + String.join(" \n", commands)) +
+                ("\n" + " &fNext Available Trigger: &7" + nextAvailableTrigger));
     }
 }

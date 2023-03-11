@@ -53,7 +53,7 @@ public class List implements Cmd {
                     cpu.addLine(msg);
                 }
             } else {
-                sender.sendMessage(MessageUtils.colorize("&6" + command.toString()));
+                sender.sendMessage(MessageUtils.colorize("&6" + command.display()));
             }
         }
 

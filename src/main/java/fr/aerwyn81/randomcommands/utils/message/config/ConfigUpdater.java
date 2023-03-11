@@ -7,9 +7,11 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 /**
@@ -26,6 +28,8 @@ public class ConfigUpdater {
     //Used for separating keys in the keyBuilder inside parseComments method
     private static final char SEPARATOR = '.';
 
+    private static final Charset UTF8_CHARSET = StandardCharsets.UTF_8;
+
     public static void update(Plugin plugin, String resourceName, File toUpdate, String... ignoredSections) throws IOException {
         update(plugin, resourceName, toUpdate, Arrays.asList(ignoredSections));
     }
@@ -33,10 +37,13 @@ public class ConfigUpdater {
     public static void update(Plugin plugin, String resourceName, File toUpdate, List<String> ignoredSections) throws IOException {
         Preconditions.checkArgument(toUpdate.exists(), "The toUpdate file doesn't exist!");
 
-        FileConfiguration defaultConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(plugin.getResource(resourceName), StandardCharsets.UTF_8));
+        FileConfiguration defaultConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(plugin.getResource(resourceName), UTF8_CHARSET));
         FileConfiguration currentConfig = YamlConfiguration.loadConfiguration(toUpdate);
-        Map<String, String> comments = parseComments(plugin, resourceName, defaultConfig);
-        Map<String, String> ignoredSectionsValues = parseIgnoredSections(toUpdate, currentConfig, comments, ignoredSections == null ? Collections.emptyList() : ignoredSections);
+
+        BufferedReader reader = Files.newBufferedReader(Paths.get(toUpdate.getPath()));
+        Map<String, String> comments = parseComments(reader, defaultConfig);
+        reader = Files.newBufferedReader(Paths.get(toUpdate.getPath()));
+        Map<String, String> ignoredSectionsValues = parseIgnoredSections(reader, currentConfig, comments, ignoredSections == null ? Collections.emptyList() : ignoredSections);
 
         // will write updated config file "contents" to a string
         StringWriter writer = new StringWriter();
@@ -45,7 +52,7 @@ public class ConfigUpdater {
 
         Path toUpdatePath = toUpdate.toPath();
         if (!value.equals(Files.readString(toUpdatePath))) { // if updated contents are not the same as current file contents, update
-            Files.write(toUpdatePath, value.getBytes(StandardCharsets.UTF_8));
+            Files.write(toUpdatePath, value.getBytes(UTF8_CHARSET));
         }
     }
 
@@ -107,8 +114,7 @@ public class ConfigUpdater {
     }
 
     //Returns a map of key comment pairs. If a key doesn't have any comments it won't be included in the map.
-    private static Map<String, String> parseComments(Plugin plugin, String resourceName, FileConfiguration defaultConfig) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(plugin.getResource(resourceName)));
+    private static Map<String, String> parseComments(BufferedReader reader, FileConfiguration defaultConfig) throws IOException {
         Map<String, String> comments = new LinkedHashMap<>();
         StringBuilder commentBuilder = new StringBuilder();
         KeyBuilder keyBuilder = new KeyBuilder(defaultConfig, SEPARATOR);
@@ -149,8 +155,7 @@ public class ConfigUpdater {
         return comments;
     }
 
-    private static Map<String, String> parseIgnoredSections(File toUpdate, FileConfiguration currentConfig, Map<String, String> comments, List<String> ignoredSections) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(toUpdate));
+    private static Map<String, String> parseIgnoredSections(BufferedReader reader, FileConfiguration currentConfig, Map<String, String> comments, List<String> ignoredSections) throws IOException {
         Map<String, String> ignoredSectionsValues = new LinkedHashMap<>(ignoredSections.size());
         KeyBuilder keyBuilder = new KeyBuilder(currentConfig, SEPARATOR);
         StringBuilder valueBuilder = new StringBuilder();

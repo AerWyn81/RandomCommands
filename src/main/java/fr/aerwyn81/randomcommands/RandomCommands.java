@@ -4,6 +4,7 @@ import fr.aerwyn81.randomcommands.commands.RCCommandExecutor;
 import fr.aerwyn81.randomcommands.runnables.GlobalTask;
 import fr.aerwyn81.randomcommands.services.ConfigService;
 import fr.aerwyn81.randomcommands.services.LanguageService;
+import fr.aerwyn81.randomcommands.utils.internal.TimedList;
 import fr.aerwyn81.randomcommands.utils.message.MessageUtils;
 import fr.aerwyn81.randomcommands.utils.message.config.ConfigUpdater;
 import org.bukkit.Bukkit;
@@ -12,6 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,10 +23,13 @@ public final class RandomCommands extends JavaPlugin {
 
     private GlobalTask globalTask;
 
+    public static TimedList<String> runningCommands;
+
     @Override
     public void onEnable() {
         instance = this;
         log = Bukkit.getConsoleSender();
+        runningCommands = new TimedList<>();
 
         log.sendMessage(MessageUtils.colorize("&4&lR&candom&6&lC&eommands &einitializing..."));
 

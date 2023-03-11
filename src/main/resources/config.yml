@@ -1,4 +1,4 @@
-language: en
+﻿language: en
 
 # If enabled, the plugin will check each tick if the requirements are respected and execute the corresponding commands
 enable: true
