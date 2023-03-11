@@ -6,6 +6,7 @@ import fr.aerwyn81.randomcommands.commands.RCAnnotations;
 import fr.aerwyn81.randomcommands.datas.Command;
 import fr.aerwyn81.randomcommands.services.LanguageService;
 import fr.aerwyn81.randomcommands.utils.internal.RunningCommandsHelper;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
 import java.util.ArrayList;
@@ -28,13 +29,19 @@ public class Reset implements Cmd {
 
         var command = RunningCommandsHelper.getCommandById(id);
         if (command.isEmpty()) {
-            sender.sendMessage(LanguageService.getMessage("Messages.NoCommandMatchingId").replaceAll("%id%", id));
+            sender.sendMessage(LanguageService.getMessage("Messages.NoCommandMatchingId")
+                    .replaceAll("%id%", id));
             return true;
         }
 
-        runningCommands.remove(command.get());
-        sender.sendMessage(LanguageService.getMessage("Messages.RunningCommandReseted").replaceAll("%id%", id));
+        var plugin = RandomCommands.getInstance();
+        Bukkit.getScheduler().runTaskLater(plugin, () ->  command.get().commandsOnReset().forEach(cmd ->
+                plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), cmd)), 1L);
 
+        runningCommands.remove(command.get());
+
+        sender.sendMessage(LanguageService.getMessage("Messages.RunningCommandReseted")
+                .replaceAll("%id%", id));
         return true;
     }
 

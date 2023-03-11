@@ -52,6 +52,11 @@ public class List implements Cmd {
                     msg = new TextComponent(MessageUtils.colorize("&7|       &7- &f" + cmd));
                     cpu.addLine(msg);
                 }
+
+                for (String cmd : command.commandsOnReset()) {
+                    msg = new TextComponent(MessageUtils.colorize("&7|       &7- &c" + cmd));
+                    cpu.addLine(msg);
+                }
             } else {
                 sender.sendMessage(MessageUtils.colorize("&6" + command.display()));
             }

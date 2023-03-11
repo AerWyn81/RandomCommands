@@ -13,6 +13,7 @@ Messages:
   NoCommandMatchingId: "%prefix% &cThere's no command with the &e%id%"
   RunningCommandReseted: "%prefix% &aThe timer of the command &e%id% &ahas been reset"
   CommandForced: "%prefix% &aCommand with id &e%id% &ahas been forced"
+  CommandForcedError: "%prefix% &cCommand with id &e%id% &acannot be forced &7(%error%)"
 
 Chat:
   Hover:

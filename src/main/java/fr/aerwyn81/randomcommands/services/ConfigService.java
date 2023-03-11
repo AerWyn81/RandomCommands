@@ -51,7 +51,8 @@ public class ConfigService {
             var command = new Command(
                     cmdGrp,
                     new Requirements(minPlayers, interval, chance, notWhile),
-                    new ArrayList<>(config.getStringList("groups." + cmdGrp + ".commands"))
+                    new ArrayList<>(config.getStringList("groups." + cmdGrp + ".commands")),
+                    new ArrayList<>(config.getStringList("groups." + cmdGrp + ".commandsOnReset"))
             );
 
             var oldCommand = RunningCommandsHelper.getCommandById(cmdGrp);

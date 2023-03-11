@@ -11,14 +11,16 @@ public final class Command {
     private final String id;
     private final Requirements requirements;
     private final ArrayList<String> commands;
+    private final ArrayList<String> commandsOnReset;
 
     private LocalDateTime startTriggerTime;
     private LocalDateTime nextAvailableTrigger;
 
-    public Command(String id, Requirements requirements, ArrayList<String> commands) {
+    public Command(String id, Requirements requirements, ArrayList<String> commands, ArrayList<String> commandsOnReset) {
         this.id = id;
         this.requirements = requirements;
         this.commands = commands;
+        this.commandsOnReset = commandsOnReset;
     }
 
     public String id() {
@@ -31,6 +33,10 @@ public final class Command {
 
     public ArrayList<String> commands() {
         return commands;
+    }
+
+    public ArrayList<String> commandsOnReset() {
+        return commandsOnReset;
     }
 
     public LocalDateTime getStartTriggerTime() {

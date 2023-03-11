@@ -14,3 +14,4 @@ groups:
       notWhile: []
     commands:
       - "say Hi!"
+    commandsOnReset: []
