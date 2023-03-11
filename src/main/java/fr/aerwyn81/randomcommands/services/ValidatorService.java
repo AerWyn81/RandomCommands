@@ -8,7 +8,7 @@ import java.util.SplittableRandom;
 public class ValidatorService {
 
     public static boolean hasEnoughPlayer(Integer required) {
-        return Bukkit.getOnlinePlayers().size() >= required;
+        return Bukkit.getOnlinePlayers().stream().filter(p -> !p.isOp()).count() >= required;
     }
 
     public static boolean isIntervalValid(LocalDateTime nextAvailableTrigger) {
