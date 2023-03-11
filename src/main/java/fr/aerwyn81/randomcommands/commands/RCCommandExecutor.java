@@ -29,6 +29,7 @@ public class RCCommandExecutor implements CommandExecutor, TabCompleter {
         this.register(new List());
         this.register(new Version());
         this.register(new Reset());
+        this.register(new Force());
     }
 
     private void register(Cmd c) {

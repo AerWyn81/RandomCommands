@@ -45,7 +45,7 @@ public class List implements Cmd {
             TextComponent msg = new TextComponent(MessageUtils.colorize("&7| &6" + (i + 1) + ". &e" + command.id()));
 
             if (sender instanceof Player) {
-                msg.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(command.requirements().display())));
+                msg.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(command.display())));
                 cpu.addLine(msg);
 
                 for (String cmd : command.commands()) {

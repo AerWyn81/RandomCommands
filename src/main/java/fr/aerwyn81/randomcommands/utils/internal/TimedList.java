@@ -2,8 +2,6 @@ package fr.aerwyn81.randomcommands.utils.internal;
 
 import java.util.*;
 
-import static java.util.stream.Collectors.toSet;
-
 public class TimedList<T> implements Iterable<T> {
     private final ArrayList<TimedItem<T>> list = new ArrayList<>();
 
@@ -17,7 +15,7 @@ public class TimedList<T> implements Iterable<T> {
             }
         };
 
-        timer.scheduleAtFixedRate(task, 0, 1000);
+        timer.scheduleAtFixedRate(task, 0, 1000L);
     }
 
     public void add(T item, long timeoutMillis) {
@@ -46,14 +44,7 @@ public class TimedList<T> implements Iterable<T> {
 
     // Return true if at least one item in the otherList to be compared exists
     public boolean disjoint(ArrayList<T> otherList) {
-        var c = list.stream()
-                .map(TimedItem::item);
-
-        var d = new HashSet<>(otherList);
-
-        var x = c.anyMatch(d::contains);
-
-        return x;
+        return list.stream().map(TimedItem::item).anyMatch(new HashSet<>(otherList)::contains);
     }
 
     @Override
@@ -61,12 +52,12 @@ public class TimedList<T> implements Iterable<T> {
         return new TimedListIterator<>(list.iterator());
     }
 
-    private record TimedItem<T>(T item, long expireTime) {
+    public record TimedItem<T>(T item, long expireTime) {
 
         public boolean isExpired() {
                 return System.currentTimeMillis() > expireTime;
             }
-        }
+    }
 
     private record TimedListIterator<T>(Iterator<TimedItem<T>> iterator) implements Iterator<T> {
 

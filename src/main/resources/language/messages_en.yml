@@ -12,6 +12,7 @@ Messages:
   NoRunningTimer: "%prefix% &cThere's no executed command running at this moment!"
   NoCommandMatchingId: "%prefix% &cThere's no command with the &e%id%"
   RunningCommandReseted: "%prefix% &aThe timer of the command &e%id% &ahas been reset"
+  CommandForced: "%prefix% &aCommand with id &e%id% &ahas been forced"
 
 Chat:
   Hover:
@@ -32,5 +33,6 @@ Help:
   Help: "&6/rc help&8: &7&oDisplay this message"
   List: "&6/rc list <page>&8: &7&oDisplays the list of existing RunningCommands"
   Reset: "&6/rc reset <id>&8: &7&oReset current running command <id>"
+  Force: "&6/rc force <id>&8: &7&oForce command <id>"
   Reload: "&6/rc reload&8: &7&oReload the configuration"
   Version: "&6/rc version&8: &7&oDisplays the version of the plugin"
