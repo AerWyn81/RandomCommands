@@ -52,7 +52,7 @@ public final class RandomCommands extends JavaPlugin {
 
         if (ConfigService.isTimerEnabled()) {
             globalTask = new GlobalTask();
-            globalTask.runTaskTimer(this, 0, ConfigService.getInternalCheckTime() * 1000L);
+            globalTask.runTaskTimer(this, 0, ConfigService.getInternalCheckTime() * 20L);
         }
 
         getCommand("randomcommands").setExecutor(new RCCommandExecutor());
