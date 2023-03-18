@@ -3,6 +3,9 @@
 # If enabled, the plugin will check each tick if the requirements are respected and execute the corresponding commands
 enable: true
 
+# Check interval in seconds
+internalCheckTime: 1
+
 # Define the specifics requirements and commands
 # Requirements are not required
 groups:

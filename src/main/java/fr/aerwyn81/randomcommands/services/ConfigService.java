@@ -33,6 +33,8 @@ public class ConfigService {
         return config.getBoolean("enable", true);
     }
 
+    public static int getInternalCheckTime() { return config.getInt("internalCheckTime", 1); }
+
     private static ArrayList<Command> commands;
     public static ArrayList<Command> getCommands() {
         if (!commands.isEmpty())

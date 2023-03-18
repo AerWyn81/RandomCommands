@@ -29,7 +29,7 @@ public class Reload implements Cmd {
 
         if (ConfigService.isTimerEnabled()) {
             plugin.setGlobalTask(new GlobalTask());
-            plugin.getGlobalTask().get().runTaskTimer(plugin, 0, 20L);
+            plugin.getGlobalTask().get().runTaskTimer(plugin, 0, ConfigService.getInternalCheckTime() * 1000L);
         }
 
         sender.sendMessage(LanguageService.getMessage("Messages.ReloadComplete"));
